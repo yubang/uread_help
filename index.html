@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+        <title>帮助中心</title>
+        <link href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css" rel="stylesheet">
+    </head>
+    <body>
+
+<div style="display:none;">
+    <div class="weui-cells__title" id="title_div">测试</div>
+        <div class="weui-cells">
+    <a class="weui-cell weui-cell_access" href="" id="link_div">
+        <div class="weui-cell__bd">
+            <p>cell standard</p>
+        </div>
+        <div class="weui-cell__ft">
+        </div>
+    </a>
+</div>
+</div>
+
+    <script>
+
+        // 定义跳转数据
+        var arrs = [
+            {
+                title: "如何订阅/新增信息源？",
+                links: [
+                    {"title": "\"优读推荐\"信息源订阅", "url": "/help/how_to_subscribe/recomment.html"},
+                    {"title": "\"复制链接\"新增订阅", "url": "/help/how_to_subscribe/byurl.html"}
+                ]
+            },{
+                title: "如何收藏？",
+                links: [
+                    {"title": "转发给优读小助手收藏", "url": "/help/how_to_collect/to_udujjb.html"},
+                    {"title": "优读中收藏文章", "url": "/help/how_to_collect/article.html"}
+                ]
+            },
+            {
+                title: "更多使用技巧",
+                links: [
+                    {"title": "查看收藏", "url": "/help/more_skills/collection.html"},
+                    {"title": "推荐优读到首页", "url": "/help/more_skills/to_home.html"},
+                    {"title": "摘抄句子", "url": "/help/more_skills/extract.html"},
+                    {"title": "字词搜索", "url": "/help/more_skills/search.html"}
+                ]
+            }
+        ];
+
+        var html = "";
+        for(var i in arrs){
+            var obj = arrs[i];
+
+            var title_node = document.getElementById("title_div").cloneNode(true);
+            title_node.innerHTML = obj['title'];
+            title_node.removeAttribute("id");
+            html += title_node.outerHTML;
+
+            html += '<div class="weui-cells">';
+
+            for(var k in obj['links']){
+                var link_node = document.getElementById("link_div").cloneNode(true);
+                link_node.removeAttribute("id");
+                link_node.childNodes[1].childNodes[1].innerHTML = obj['links'][k]['title'];
+                link_node.setAttribute("href", obj['links'][k]['url']);
+                html += link_node.outerHTML;
+            }
+            html += '</div>';
+
+        }
+        document.body.innerHTML += html;
+        console.log(html);
+
+    </script>
+
+    </body>
+</html>
